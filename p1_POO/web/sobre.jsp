@@ -15,6 +15,6 @@
         <%@include file="WEB-INF/jspf/menu.jspf" %>
         <h1>Nome: Diogenes Paulino</h1>
         <h1>RA: 1290481912037</h1>
-        <h1>GitHub: <a href="https://github.com/Diogemaz/p1_POO">Link</a></h1>
+        <h1>GitHub: <a href="https://github.com/Diogemaz/prova_POO">Link</a></h1>
     </body>
 </html>
