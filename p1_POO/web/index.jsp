@@ -31,6 +31,7 @@
         <title>Home</title>
     </head>
     <body>
+        <%@include file="WEB-INF/jspf/menu.jspf" %>
         <h1>Nome: Diogenes Paulino</h1>
         <h1>RA: 1290481912037</h1>
         <h1>Quantidade de disciplinas: <% out.print(obj.getList().size());  %></h1>
