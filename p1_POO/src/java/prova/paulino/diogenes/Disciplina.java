@@ -5,9 +5,7 @@
  */
 package prova.paulino.diogenes;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import web.DbListener;
 
@@ -89,7 +87,8 @@ public class Disciplina {
      */
     public void setNota(double nota) {
         this.nota = nota;
-    }public static ArrayList<Disciplina> getList() throws Exception{
+    }
+    public static ArrayList<Disciplina> getList() throws Exception{
         ArrayList<Disciplina> list = new ArrayList<>();
         Connection con = DbListener.getConnection();
         Statement stmt = con.createStatement();
@@ -107,11 +106,35 @@ public class Disciplina {
         con.close();
         return list;
     }
-    public void addList(Disciplina disciplina){
-        Lista.add(new Disciplina(disciplina.getNome(), disciplina.getEmenta(), disciplina.getCiclo()));
+    public static void addNota(String nome, double nota) throws Exception{
+        Connection con = DbListener.getConnection();
+        PreparedStatement stmt = con.prepareStatement
+        ("UPDATE disciplina SET nota = ? WHERE nome = ?");        
+        stmt.setDouble(1,nota);
+        stmt.setString(2,nome);
+        stmt.execute();
+        stmt.close();
+        con.close();
     }
-    public void addNota(int indice, double nota){
-        Lista.get(indice).setNota(nota);
+    public static void addDisciplina(String nome, String ementa, int ciclo) throws Exception{
+        Connection con = DbListener.getConnection();
+        PreparedStatement stmt = con.prepareStatement
+        ("INSERT INTO disciplina(nome, ementa, ciclo) VALUES (?,?,?)");        
+        stmt.setString(1,nome);
+        stmt.setString(2,ementa);
+        stmt.setInt(3,ciclo);
+        stmt.execute();
+        stmt.close();
+        con.close();
+    }
+    public static void RemoverDisciplina(String nome) throws Exception{
+        Connection con = DbListener.getConnection();
+        PreparedStatement stmt = con.prepareStatement
+        ("DELETE FROM disciplina WHERE nome = ?");
+        stmt.setString(1,nome);
+        stmt.execute();
+        stmt.close();
+        con.close();
     }
      public static String getCreateStatement(){
         return "CREATE TABLE IF NOT EXISTS disciplina("
